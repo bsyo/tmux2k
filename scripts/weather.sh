@@ -72,7 +72,11 @@ display_weather() {
 main() {
   # process should be cancelled when session is killed
   if ping -q -c 1 -W 1 ipinfo.io &>/dev/null; then
-    echo "$(display_weather) $(display_location)"
+    if $show_location; then
+      echo "$(display_weather) $(display_location)"
+    else
+      echo "$(display_weather)"
+    fi
   else
     echo "Location Unavailable"
   fi
